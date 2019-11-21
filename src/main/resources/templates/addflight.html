@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head th:replace="base :: headstuff"></head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+<div class="container">
+    <div class="jumbotron col-md-6 mx-auto" style="margin-top: 20px; padding-top: 2rem">
+        <div class="mx-auto">
+            <h1 class="display-4">Add a Flight</h1>
+        </div>
+        <form class="form-signin mx-auto"action="#" th:action="@{/process}" th:object="${flight}" method="post" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" th:field="*{url}" />
+            <div class="form-label-group">
+                    <input type="text" class="form-control" id="departure" name="departure" th:field="*{departure}" placeholder="Departure" required autofocus/>
+                    <label for="departure">Departure</label>
+            </div>
+            <div class="form-label-group">
+                    <input type="text" class="form-control" id="arrival" name="arrival" placeholder="Arrival" th:field="*{arrival}" required autofocus/>
+                    <label for="arrival">Arrival</label>
+            </div>
+            <div class="form-label-group">
+                <input type="text" class="form-control" id="date" name="date" placeholder="01/01/2020" th:field="*{date}" required autofocus/>
+                <label for="date">Date</label>
+            </div>
+            <div class="form-label-group">
+                <input type="text" class="form-control" id="type" name="type" placeholder="One-way" th:field="*{type}" required autofocus/>
+                <label for="type">Fare Type</label>
+            </div>
+            <div class="form-label-group">
+                <input type="text" class="form-control" id="airline" name="airline" placeholder="Delta" th:field="*{airline}" required autofocus/>
+                <label for="airline">Airline</label>
+            </div>
+            <div class="form-label-group">
+                <input type="text" class="form-control" id="fn" name="fn" placeholder="AA000" th:field="*{flightNumber}" required autofocus/>
+                <label for="fn">Flight Number</label>
+            </div>
+            <div class="form-label-group">
+                <input type="text" class="form-control" id="price" name="price" placeholder="1000" th:field="*{price}" required autofocus/>
+                <label for="price">Price(USD)</label>
+            </div>
+            <div class="form-group">
+                    <div th:if="${flight.url} != null">
+                        <img th:src="${flight.url}" style="height: 16rem; width: 30rem"/>
+                    </div>
+                    <label for="image">Image of Destination(max size: 1MB)</label>
+                    <input type="file" class="form-control-file" id="image" name="file" th:src="${flight.url}"/>
+                    <input type="hidden" th:field="*{id}"/>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Submit</button>
+
+        </form>
+    </div>
+</div>
+<footer th:replace="base :: footer"></footer>
+</body>
+<th:block th:replace="base :: jslinks"></th:block>
+</html>
