@@ -3,6 +3,27 @@
 <head th:replace="base :: headstuff"></head>
 <body>
 <nav th:replace="base :: navbar"></nav>
+<div id="background-wrap">
+    <div class="x1">
+        <div class="cloud"></div>
+    </div>
+
+    <div class="x2">
+        <div class="cloud"></div>
+    </div>
+
+    <div class="x3">
+        <div class="cloud"></div>
+    </div>
+
+    <div class="x4">
+        <div class="cloud"></div>
+    </div>
+
+    <div class="x5">
+        <div class="cloud"></div>
+    </div>
+</div>
 <div class="container">
     <div class="jumbotron col-md-6 mx-auto" style="margin-top: 20px; padding-top: 2rem">
         <div class="mx-auto">
@@ -40,7 +61,7 @@
                 <label for="price">Price(USD)</label>
             </div>
             <div class="form-group">
-                    <div th:if="${flight.url} != null">
+                    <div th:if="${flight.url != null and !flight.url.equals('')}">
                         <img th:src="${flight.url}" style="height: 16rem; width: 30rem"/>
                     </div>
                     <label for="image">Image of Destination(max size: 1MB)</label>

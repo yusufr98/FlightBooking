@@ -3,26 +3,48 @@
 <head th:replace="base :: headstuff"></head>
 <body>
 <nav th:replace="base :: navbar"></nav>
-<div class="container col-md-10">
+<div id="background-wrap">
+    <div class="x1">
+        <div class="cloud"></div>
+    </div>
+
+    <div class="x2">
+        <div class="cloud"></div>
+    </div>
+
+    <div class="x3">
+        <div class="cloud"></div>
+    </div>
+
+    <div class="x4">
+        <div class="cloud"></div>
+    </div>
+
+    <div class="x5">
+        <div class="cloud"></div>
+    </div>
+</div>
+<div class="container col-md-8">
     <div th:each="flight : ${flights}">
-        <div class="card mb-3">
+        <div class="card mb-3 animated fadeInUp">
     <div class="card-horizontal">
-        <div class="col-md-5">
+        <div class="card-header col-md-3">
+            <strong>[[${flight.departure}]]<br/><br/><i class="fas fa-arrow-circle-right"></i><br/><br/>[[${flight.arrival}]]</strong>
+        </div>
+        <div class="col-md-3">
             <div class="card-body">
-                <p class="card-text" th:inline="text"><strong>Departure: </strong>[[${flight.departure}]]</p>
-                <p class="card-text" th:inline="text"><strong>Arrival: </strong>[[${flight.arrival}]]</p>
                 <p class="card-text"><small th:text="${flight.date}" class="text-muted"></small></p>
                 <p class="card-text"><small th:text="${flight.type}" class="text-muted"></small></p>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="card-body">
                 <p class="card-text" th:text="${flight.airline}"></p>
                 <p class="card-text" th:text="${flight.flightNumber}"></p>
                 <p class="card-text" th:inline="text">$[[${flight.price}]]</p>
             </div>
         </div>
-        <div class="col-md-2 img-square-wrapper img-download">
+        <div th:if="${flight.url != null and !flight.url.equals('')}" class="col-md-2 img-square-wrapper img-download">
             <img class="card-img" th:src="${flight.url}" alt="Arrival Destination">
             <a data-toggle="collapse" th:href="'#collapse_'+${flight.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
                 <span style="font-size:1.25em"><i class="fas fa-cog"></i></span>
@@ -35,8 +57,20 @@
                 </div>
             </div>
         </div>
+        <div th:if="${flight.url == null or flight.url.equals('')}" class="col-md-2 img-square-wrapper img-download">
+            <a data-toggle="collapse" th:href="'#collapse_'+${flight.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <span style="font-size:1.25em"><i class="fas fa-cog"></i></span>
+            </a>
+            <div class="collapse" th:id="'collapse_'+${flight.id}">
+                <div class="card card-body card-menu" style="padding: 10px;margin-right: 1px; height: 147px;">
+                    <a class="btn btn-info" role="button" style="margin-bottom:5px" th:href="@{/update/{id}(id=${flight.id})}">Update</a>
+                    <a class="btn btn-info" role="button" style="margin-bottom:5px" th:href="@{/show/{id}(id=${flight.id})}">Detail</a>
+                    <a class="btn btn-info" role="button" th:href="@{/delete/{id}(id=${flight.id})}">Delete</a>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+    </div>
 </div>
 </div>
 <footer th:replace="base :: footer"></footer>
